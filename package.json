@@ -1,0 +1,51 @@
+{
+  "name": "musicplay",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "test": "node --test",
+    "web": "node --env-file-if-exists=.env server.js",
+    "dist:win": "electron-builder --win nsis --x64",
+    "pack:win": "electron-builder --win --x64 --dir",
+    "dist:portable": "electron-builder --win portable --x64"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "music-metadata": "^11.0.0"
+  },
+  "description": "Reproductor de m\u00fasica para Windows con biblioteca local y YouTube",
+  "author": "MusicPLay",
+  "main": "desktop/main.cjs",
+  "build": {
+    "appId": "com.musicplay.desktop",
+    "productName": "MusicPLay",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "desktop/**/*",
+      "public/**/*",
+      "server.js",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "artifactName": "MusicPLay-Setup-${version}.${ext}"
+    }
+  },
+  "devDependencies": {
+    "electron": "^45.0.0",
+    "electron-builder": "^26.18.0"
+  }
+}
